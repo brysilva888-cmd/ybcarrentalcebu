@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { HashRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ConfigProvider } from './context/ConfigContext';
 import Layout from './components/Layout';
 import Home from './pages/Home';
@@ -16,7 +16,7 @@ import TermsOfService from './pages/TermsOfService';
 const App: React.FC = () => {
   return (
     <ConfigProvider>
-      <HashRouter>
+      <BrowserRouter>
         <Layout>
           <Routes>
             <Route path="/" element={<Home />} />
@@ -30,7 +30,7 @@ const App: React.FC = () => {
             <Route path="/terms-of-service" element={<TermsOfService />} />
           </Routes>
         </Layout>
-      </HashRouter>
+      </BrowserRouter>
     </ConfigProvider>
   );
 };
