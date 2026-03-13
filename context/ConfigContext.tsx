@@ -37,7 +37,7 @@ const DEFAULT_CONFIG = {
     home: {
       heroTitle: "Premium Cebu Car Rental with FREE Driver & Fuel.",
       heroSubtitle: "Explore the scenic roads and hidden gems of Cebu with our stress-free, all-inclusive tour packages.",
-      heroImage: "https://lh3.googleusercontent.com/pw/AP1GczNlt_3s7gK2N5u9sE4hx8vbV6_Ztqv3dEWW567eoiSH5t5FzZud_okEjfLRr01-bQPB1UWS9E0DW07TiX96a-07uKnmsVZlUPbut051eTOkaNmnFGY=w2400"
+      heroImage: "https://drive.google.com/uc?id=1MRDuv7yqpGj3yK7By7OW1ISU7Ed39xPk"
     }
   }
 };
