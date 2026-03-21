@@ -43,11 +43,17 @@ const Home: React.FC = () => {
       {config.design.homeSections.hero && (
         <section className="relative h-[85vh] flex items-center overflow-hidden">
           <div className="absolute inset-0 z-0">
-            <img 
-              src={config.pages.home.heroImage} 
-              alt="Cebu Scenic View" 
-              className="w-full h-full object-cover brightness-[0.45]"
-            />
+            <picture>
+              <source 
+                media="(max-width: 768px)" 
+                srcSet={config.pages.home.heroImageMobile || config.pages.home.heroImage} 
+              />
+              <img 
+                src={config.pages.home.heroImage} 
+                alt="Cebu Scenic View" 
+                className="w-full h-full object-cover brightness-[0.45]"
+              />
+            </picture>
           </div>
           <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-white">
             <div className="max-w-3xl">

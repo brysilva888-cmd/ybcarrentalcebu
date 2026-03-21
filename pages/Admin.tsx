@@ -547,13 +547,24 @@ const Admin: React.FC = () => {
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-bold uppercase tracking-widest text-gray-400 mb-2">Hero Image URL</label>
+                  <label className="block text-xs font-bold uppercase tracking-widest text-gray-400 mb-2">Hero Image URL (Desktop)</label>
                   <input 
                     type="text" 
                     className="w-full p-3 bg-gray-50 rounded-xl border-none focus:ring-2 focus:ring-black outline-none"
                     value={config.pages.home.heroImage}
                     onChange={(e) => updateConfig({ 
                       pages: { ...config.pages, home: { ...config.pages.home, heroImage: e.target.value } } 
+                    })}
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs font-bold uppercase tracking-widest text-gray-400 mb-2">Hero Image URL (Mobile)</label>
+                  <input 
+                    type="text" 
+                    className="w-full p-3 bg-gray-50 rounded-xl border-none focus:ring-2 focus:ring-black outline-none"
+                    value={config.pages.home.heroImageMobile}
+                    onChange={(e) => updateConfig({ 
+                      pages: { ...config.pages, home: { ...config.pages.home, heroImageMobile: e.target.value } } 
                     })}
                   />
                 </div>
