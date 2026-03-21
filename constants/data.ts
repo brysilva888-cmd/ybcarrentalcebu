@@ -19,7 +19,7 @@ export const TOURS: TourPackage[] = [
     id: "cebu-city-tour",
     title: "Cebu City Highlands Tour and 10K Roses",
     description: "Experience Cebu's scenic highlands and rich history in one day—iconic viewpoints, cultural landmarks, and must-see city attractions, topped off with great local food and pasalubong shopping.",
-    image: "https://lh3.googleusercontent.com/pw/AP1GczPdJEb9AFfsdepYmV7JAcujbr4EMbDSpjRSAXvwm_0uLMXov8wUVDEikBueLw_ygnq-9H5ylcv9uhoeovTamUHpvuKQUJzJCNslIRAM3xnSPrkzctc=w2400",
+    image: "https://res.cloudinary.com/dgwcfarmv/image/upload/v1774066057/cebu2_znrw8f.webp",
     highlights: [
       'Sirao Flower Garden',
       'Temple of Leah',
