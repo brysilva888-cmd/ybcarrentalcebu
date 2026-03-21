@@ -3,7 +3,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import SEO from '../components/SEO';
 import { useConfig } from '../context/ConfigContext';
-import { BLOG_POSTS } from '../constants/blog';
 
 const Home: React.FC = () => {
   const { config } = useConfig();
@@ -185,51 +184,6 @@ const Home: React.FC = () => {
         </section>
       )}
 
-      {/* Blog Section */}
-      {config.design.homeSections.blog && (
-        <section className="py-24 bg-white">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex flex-col md:flex-row justify-between items-end mb-16">
-              <div className="max-w-xl">
-                <h2 className="text-3xl md:text-4xl font-bold text-black mb-4 uppercase tracking-tight">Cebu Travel Insights</h2>
-                <p className="text-gray-600">Expert tips and guides for your next trip.</p>
-              </div>
-              <Link to="/blog" className="hidden md:block text-brand font-bold hover:underline">Read All Articles &rarr;</Link>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {config.blog.filter(p => p.published).slice(0, 3).map((post) => (
-                <article key={post.slug} className="group cursor-pointer">
-                  <Link to={`/blog/${post.slug}`}>
-                    <div className="relative h-48 rounded-3xl overflow-hidden mb-6">
-                      <img 
-                        src={post.image || 'https://picsum.photos/seed/cebu/800/600'} 
-                        alt={post.title} 
-                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                        referrerPolicy="no-referrer"
-                        loading="lazy"
-                      />
-                    </div>
-                    <div className="space-y-3">
-                      <div className="flex items-center text-[10px] font-bold text-brand uppercase tracking-widest">
-                        <span>{post.category}</span>
-                        <span className="mx-2 text-gray-300">•</span>
-                        <span className="text-gray-400">{post.date}</span>
-                      </div>
-                      <h3 className="text-lg font-bold text-black group-hover:text-brand transition-colors uppercase tracking-tight line-clamp-2">
-                        {post.title}
-                      </h3>
-                      <p className="text-gray-500 text-sm line-clamp-2 leading-relaxed">
-                        {post.excerpt}
-                      </p>
-                    </div>
-                  </Link>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
 
       {/* Final CTA */}
       {config.design.homeSections.cta && (
