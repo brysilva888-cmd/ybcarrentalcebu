@@ -1,5 +1,53 @@
 @import "tailwindcss";
 
+/* Quill Editor Custom Styles */
+.quill-editor-container .ql-toolbar.ql-snow {
+  border: none;
+  border-bottom: 1px solid #f3f4f6;
+  padding: 1rem;
+  background: white;
+}
+
+.quill-editor-container .ql-container.ql-snow {
+  border: none;
+  font-family: inherit;
+}
+
+.quill-editor-container .ql-editor {
+  min-height: 300px;
+  padding: 1.5rem;
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+
+.quill-editor-container .ql-editor.ql-blank::before {
+  left: 1.5rem;
+  color: #9ca3af;
+  font-style: normal;
+}
+
+.quill-editor-container .ql-snow .ql-picker.ql-header {
+  width: 120px;
+}
+
+.quill-editor-container .ql-snow .ql-stroke {
+  stroke: #6b7280;
+}
+
+.quill-editor-container .ql-snow .ql-fill {
+  fill: #6b7280;
+}
+
+.quill-editor-container .ql-snow.ql-toolbar button:hover .ql-stroke,
+.quill-editor-container .ql-snow.ql-toolbar button.ql-active .ql-stroke {
+  stroke: #000;
+}
+
+.quill-editor-container .ql-snow.ql-toolbar button:hover .ql-fill,
+.quill-editor-container .ql-snow.ql-toolbar button.ql-active .ql-fill {
+  fill: #000;
+}
+
 @theme {
   --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;

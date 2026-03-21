@@ -101,22 +101,10 @@ const BlogPost: React.FC = () => {
           </Link>
         </div>
 
-        <article className="prose prose-lg max-w-none text-gray-700 leading-relaxed">
-          {post.content.map((paragraph, idx) => {
-            if (paragraph.startsWith('##')) {
-              return (
-                <h2 key={idx} className="text-2xl md:text-3xl font-black text-black mt-12 mb-6 uppercase tracking-tight">
-                  {paragraph.replace('## ', '')}
-                </h2>
-              );
-            }
-            return (
-              <p key={idx} className="mb-6 text-lg">
-                {paragraph}
-              </p>
-            );
-          })}
-        </article>
+        <article 
+          className="prose prose-lg max-w-none text-gray-700 leading-relaxed prose-headings:text-black prose-headings:font-black prose-headings:uppercase prose-headings:tracking-tight prose-p:text-lg prose-p:mb-6"
+          dangerouslySetInnerHTML={{ __html: post.content }}
+        />
 
         <div className="mt-20 p-10 bg-gray-50 rounded-3xl border border-gray-100 text-center">
           <h3 className="text-2xl font-bold text-black mb-4 uppercase tracking-tight">Interested in visiting these places?</h3>

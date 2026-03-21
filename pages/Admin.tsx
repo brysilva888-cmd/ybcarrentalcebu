@@ -1,5 +1,7 @@
 
 import React, { useState } from 'react';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 import { useConfig } from '../context/ConfigContext';
 import { BlogPost } from '../constants/blog';
 
@@ -42,7 +44,7 @@ const BlogManager: React.FC = () => {
       author: 'YB Team',
       image: '',
       category: 'Travel Guide',
-      content: [],
+      content: '',
       published: false,
       updatedAt: new Date().toISOString()
     };
@@ -131,18 +133,28 @@ const BlogManager: React.FC = () => {
                   />
                 </div>
 
-                <div>
+                <div className="space-y-4">
                   <div className="flex justify-between items-center mb-2">
                     <label className="block text-[10px] font-bold uppercase tracking-widest text-gray-400">Body Content</label>
-                    <span className="text-[10px] text-gray-300 font-mono">Use ## for headings</span>
+                    <span className="text-[10px] text-gray-300 font-mono">Rich Text Editor</span>
                   </div>
-                  <textarea 
-                    rows={15}
-                    className="w-full p-4 bg-gray-50 rounded-2xl outline-none focus:ring-2 focus:ring-black text-sm font-mono leading-relaxed"
-                    placeholder="Write your story here... Each line is a paragraph."
-                    value={editingPost.content.join('\n')}
-                    onChange={(e) => setEditingPost({ ...editingPost, content: e.target.value.split('\n') })}
-                  />
+                  <div className="quill-editor-container bg-gray-50 rounded-2xl overflow-hidden border border-gray-100">
+                    <ReactQuill 
+                      theme="snow"
+                      value={editingPost.content}
+                      onChange={(content) => setEditingPost({ ...editingPost, content })}
+                      modules={{
+                        toolbar: [
+                          [{ 'header': [1, 2, 3, false] }],
+                          ['bold', 'italic', 'underline', 'strike'],
+                          [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                          ['link', 'image'],
+                          ['clean']
+                        ],
+                      }}
+                      className="h-96"
+                    />
+                  </div>
                 </div>
 
                 <div className="flex items-center space-x-4 p-4 bg-gray-50 rounded-2xl">
@@ -193,12 +205,10 @@ const BlogManager: React.FC = () => {
                   {editingPost.title || 'Your Article Title'}
                 </h3>
                 <div className="space-y-2">
-                  {editingPost.content.slice(0, 3).map((line, i) => (
-                    <p key={i} className={`text-xs text-gray-500 line-clamp-2 ${line.startsWith('##') ? 'font-bold text-black' : ''}`}>
-                      {line.replace('## ', '')}
-                    </p>
-                  ))}
-                  {editingPost.content.length > 3 && <p className="text-xs text-gray-300">...</p>}
+                  <div 
+                    className="text-xs text-gray-500 line-clamp-6 prose prose-sm prose-headings:text-black prose-headings:font-bold prose-headings:text-xs"
+                    dangerouslySetInnerHTML={{ __html: editingPost.content }}
+                  />
                 </div>
               </div>
             </div>
