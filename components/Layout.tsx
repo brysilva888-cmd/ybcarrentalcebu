@@ -19,17 +19,20 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const isHomePage = location.pathname === '/';
+  const showSolidHeader = isScrolled || !isHomePage;
+
   return (
     <div className="flex flex-col min-h-screen font-sans antialiased">
       <SchemaMarkup />
       {/* INTEGRATED HEADER */}
-      <header className={`fixed w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-white shadow-md py-2' : 'bg-transparent py-3 md:py-4'}`}>
+      <header className={`fixed w-full z-50 transition-all duration-300 ${showSolidHeader ? 'bg-white shadow-md py-2' : 'bg-transparent py-3 md:py-4'}`}>
         <div className="max-w-7xl mx-auto px-6 sm:px-6 lg:px-8 flex justify-between items-center">
-          <Link to="/" className={`flex flex-col group ${isScrolled ? 'text-brand' : 'text-white'}`}>
+          <Link to="/" className={`flex flex-col group ${showSolidHeader ? 'text-black' : 'text-white'}`}>
             <span className="text-xl md:text-2xl font-black uppercase tracking-tighter leading-none">
               {config.business.name}
             </span>
-            <span className={`hidden md:block text-[9px] md:text-[10px] font-bold uppercase tracking-[0.2em] mt-1 ${isScrolled ? 'text-brand' : 'text-white/80'}`}>
+            <span className={`hidden md:block text-[9px] md:text-[10px] font-bold uppercase tracking-[0.2em] mt-1 ${showSolidHeader ? 'text-gray-500' : 'text-white/80'}`}>
               {config.business.tagline}
             </span>
           </Link>
@@ -41,8 +44,8 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                 to={link.path} 
                 className={`text-sm font-bold transition-colors ${
                   location.pathname === link.path 
-                    ? (isScrolled ? 'text-brand' : 'text-white underline underline-offset-8') 
-                    : (isScrolled ? 'text-gray-700 hover:text-brand' : 'text-white hover:text-gray-200')
+                    ? (showSolidHeader ? 'text-brand' : 'text-white underline underline-offset-8') 
+                    : (showSolidHeader ? 'text-gray-700 hover:text-brand' : 'text-white hover:text-gray-200')
                 }`}
               >
                 {link.name}
@@ -51,7 +54,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             <Link
               to="/contact"
               className={`px-5 py-2.5 rounded-full text-sm font-bold transition-all ${
-                isScrolled 
+                showSolidHeader 
                   ? 'bg-brand text-white shadow-lg shadow-brand/20' 
                   : 'bg-white text-brand shadow-xl'
               } hover:scale-105`}
@@ -61,9 +64,9 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           </nav>
 
           <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="md:hidden p-2">
-            <div className={`w-6 h-0.5 mb-1.5 transition-all ${isScrolled ? 'bg-black' : 'bg-white'}`}></div>
-            <div className={`w-6 h-0.5 mb-1.5 transition-all ${isScrolled ? 'bg-black' : 'bg-white'}`}></div>
-            <div className={`w-6 h-0.5 transition-all ${isScrolled ? 'bg-black' : 'bg-white'}`}></div>
+            <div className={`w-6 h-0.5 mb-1.5 transition-all ${showSolidHeader ? 'bg-black' : 'bg-white'}`}></div>
+            <div className={`w-6 h-0.5 mb-1.5 transition-all ${showSolidHeader ? 'bg-black' : 'bg-white'}`}></div>
+            <div className={`w-6 h-0.5 transition-all ${showSolidHeader ? 'bg-black' : 'bg-white'}`}></div>
           </button>
         </div>
         
