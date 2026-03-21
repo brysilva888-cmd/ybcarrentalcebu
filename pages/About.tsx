@@ -38,9 +38,10 @@ const About: React.FC = () => {
             <div className="relative">
               <div className="aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl border-4 border-white">
                 <img 
-                  src="https://lh3.googleusercontent.com/pw/AP1GczO5u-HHXQuq80A8BTP272j6LuONCtc-OTTJFjywTu-iyg8lySxlLbEh2h_v4xfoC-pFPy8156YssI6wcM5pEiRSAYEVdUCYIMwJ-CX-eezLgjRQMCg=w2400" 
+                  src="https://res.cloudinary.com/dgwcfarmv/image/upload/v1774078211/discover-cebu-ybcarrentalcebu-_ysbqdy.webp" 
                   alt="Cebu landmarks" 
                   className="w-full h-full object-cover"
+                  referrerPolicy="no-referrer"
                 />
               </div>
               <div className="absolute -bottom-8 -left-8 bg-red-600 p-8 rounded-3xl shadow-xl text-white hidden md:block border-4 border-white">

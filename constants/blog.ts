@@ -43,7 +43,7 @@ export const BLOG_POSTS: BlogPost[] = [
     date: "June 02, 2024",
     author: "Nestor",
     category: "Pro Tips",
-    image: "https://lh3.googleusercontent.com/pw/AP1GczO5u-HHXQuq80A8BTP272j6LuONCtc-OTTJFjywTu-iyg8lySxlLbEh2h_v4xfoC-pFPy8156YssI6wcM5pEiRSAYEVdUCYIMwJ-CX-eezLgjRQMCg=w2400",
+    image: "https://res.cloudinary.com/dgwcfarmv/image/upload/v1774078211/discover-cebu-ybcarrentalcebu-_ysbqdy.webp",
     published: true,
     content: `
       <p>Visiting all the major landmarks in Cebu City in one day can be exhausting if not planned correctly. Here is how we recommend doing it.</p>
