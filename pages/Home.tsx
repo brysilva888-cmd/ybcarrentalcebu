@@ -6,8 +6,8 @@ import { useConfig } from '../context/ConfigContext';
 const Home: React.FC = () => {
   const { config } = useConfig();
   
-  // Base working URL from your data.ts
-  const desktopHero = config.pages.home.heroImage;
+  // Direct url
+  const desktopHero = "https://res.cloudinary.com/dgwcfarmv/image/upload/v1774066057/cebu2_znrw8f.webp";
   
   // Optimized URL for Mobile
   const mobileHero = "https://res.cloudinary.com/dgwcfarmv/image/upload/c_scale,w_800,f_auto,q_auto/v1774066057/cebu2_znrw8f.webp";
