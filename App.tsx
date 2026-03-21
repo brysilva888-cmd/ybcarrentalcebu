@@ -1,7 +1,13 @@
 import React, { Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Layout from './components/Layout';
-import LoadingSpinner from './components/LoadingSpinner'; // Create a simple spinner component
+
+// Simple Inline Spinner to replace the missing file
+const PageLoader = () => (
+  <div className="flex items-center justify-center min-h-[60vh]">
+    <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-brand"></div>
+  </div>
+);
 
 // Lazy load your pages
 const Home = lazy(() => import('./pages/Home'));
@@ -15,8 +21,8 @@ const App: React.FC = () => {
   return (
     <Router>
       <Layout>
-        {/* Suspense handles the "loading" state while the page code is being fetched */}
-        <Suspense fallback={<LoadingSpinner />}>
+        {/* Suspense handles the "loading" state using our new PageLoader */}
+        <Suspense fallback={<PageLoader />}>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/services" element={<Services />} />
