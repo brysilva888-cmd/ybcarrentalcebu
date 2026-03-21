@@ -23,13 +23,13 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     <div className="flex flex-col min-h-screen font-sans antialiased">
       <SchemaMarkup />
       {/* INTEGRATED HEADER */}
-      <header className={`fixed w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-white shadow-md py-2' : 'bg-transparent py-4'}`}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
+      <header className={`fixed w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-white shadow-md py-2' : 'bg-transparent py-3 md:py-4'}`}>
+        <div className="max-w-7xl mx-auto px-6 sm:px-6 lg:px-8 flex justify-between items-center">
           <Link to="/" className={`flex flex-col group ${isScrolled ? 'text-brand' : 'text-white'}`}>
             <span className="text-xl md:text-2xl font-black uppercase tracking-tighter leading-none">
               {config.business.name}
             </span>
-            <span className={`text-[9px] md:text-[10px] font-bold uppercase tracking-[0.2em] mt-1 ${isScrolled ? 'text-brand' : 'text-white/80'}`}>
+            <span className={`hidden md:block text-[9px] md:text-[10px] font-bold uppercase tracking-[0.2em] mt-1 ${isScrolled ? 'text-brand' : 'text-white/80'}`}>
               {config.business.tagline}
             </span>
           </Link>
@@ -105,7 +105,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 
       {/* INTEGRATED FOOTER */}
       <footer className="bg-black text-gray-400 pt-16 pb-8">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto px-6 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
             <div>
               <h3 className="text-white text-xl font-bold mb-4">{config.business.name}</h3>

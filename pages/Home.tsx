@@ -41,7 +41,7 @@ const Home: React.FC = () => {
 
       {/* Hero Section */}
       {config.design.homeSections.hero && (
-        <section className="relative h-[85vh] flex items-center overflow-hidden">
+        <section className="relative min-h-[85vh] flex items-center overflow-hidden">
           <div className="absolute inset-0 z-0">
             <picture>
               <source 
@@ -56,27 +56,27 @@ const Home: React.FC = () => {
               />
             </picture>
           </div>
-          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-white">
+          <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-6 lg:px-8 text-white pt-32 pb-16 md:pt-0 md:pb-0">
             <div className="max-w-3xl">
-              <span className="inline-block bg-brand text-xs font-bold uppercase tracking-[0.2em] px-4 py-1.5 rounded-full mb-6 shadow-lg shadow-brand/30">
+              <span className="inline-block bg-brand text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] px-4 py-1.5 rounded-full mb-6 md:mb-8 shadow-lg shadow-brand/30">
                 {config.business.tagline}
               </span>
-              <h1 className="text-4xl md:text-6xl font-extrabold mb-6 leading-tight drop-shadow-2xl text-balance">
+              <h1 className="text-3xl md:text-6xl font-extrabold mb-6 md:mb-8 leading-tight drop-shadow-2xl text-balance">
                 {config.pages.home.heroTitle}
               </h1>
-              <p className="text-lg md:text-xl text-gray-100 mb-10 leading-relaxed drop-shadow-md max-w-2xl">
+              <p className="text-lg md:text-xl text-gray-100 mb-10 md:mb-12 leading-relaxed drop-shadow-md max-w-2xl">
                 {config.pages.home.heroSubtitle}
               </p>
-              <div className="flex flex-col sm:flex-row gap-4">
+              <div className="flex flex-col sm:flex-row gap-4 md:gap-5">
                 <Link 
                   to="/services" 
-                  className="bg-white text-brand px-8 py-4 rounded-xl text-lg font-bold hover:bg-gray-100 transition-all text-center shadow-xl shadow-black/20"
+                  className="bg-white text-brand px-8 py-4 rounded-xl text-base md:text-lg font-bold hover:bg-gray-100 transition-all text-center shadow-xl shadow-black/20"
                 >
                   Explore Tour Packages
                 </Link>
                 <Link 
                   to="/contact" 
-                  className="bg-brand text-white px-8 py-4 rounded-xl text-lg font-bold hover:opacity-90 transition-all text-center shadow-xl shadow-brand/40 border border-white/10"
+                  className="bg-brand text-white px-8 py-4 rounded-xl text-base md:text-lg font-bold hover:opacity-90 transition-all text-center shadow-xl shadow-brand/40 border border-white/10"
                 >
                   Book with us!
                 </Link>
