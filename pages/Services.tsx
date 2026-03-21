@@ -82,7 +82,7 @@ I'm interested in this tour package. Please check availability for my group!`;
               {TOURS.map((tour, idx) => (
                 <div key={tour.id} className={`flex flex-col ${idx % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'} bg-white rounded-3xl overflow-hidden shadow-xl border border-gray-100`}>
                   <div className="lg:w-1/2 h-80 lg:h-auto overflow-hidden">
-                    <img src={tour.image} alt={tour.title} className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
+                    <img src={tour.image} alt={tour.title} className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" loading="lazy" />
                   </div>
                   <div className="lg:w-1/2 p-8 md:p-12 flex flex-col justify-center">
                     <div className="flex items-center justify-between mb-4">

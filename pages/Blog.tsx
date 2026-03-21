@@ -38,6 +38,7 @@ const Blog: React.FC = () => {
                       alt={post.title} 
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                       referrerPolicy="no-referrer"
+                      loading="lazy"
                     />
                     <div className="absolute top-4 left-4">
                       <span className="bg-red-600 text-white text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full">

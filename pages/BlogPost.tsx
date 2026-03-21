@@ -65,6 +65,7 @@ const BlogPost: React.FC = () => {
           src={post.image} 
           alt={post.title} 
           className="w-full h-full object-cover brightness-[0.7]"
+          fetchPriority="high"
         />
         <div className="absolute inset-0 flex items-center justify-center">
           <div className="max-w-4xl px-4 text-center">

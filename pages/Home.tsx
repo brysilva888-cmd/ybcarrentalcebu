@@ -52,6 +52,7 @@ const Home: React.FC = () => {
                 src={config.pages.home.heroImage} 
                 alt="Cebu Scenic View" 
                 className="w-full h-full object-cover brightness-[0.45]"
+                fetchPriority="high"
               />
             </picture>
           </div>
@@ -139,7 +140,7 @@ const Home: React.FC = () => {
               {config.tours.slice(0, 3).map((tour) => (
                 <div key={tour.id} className="bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-xl transition-all border border-gray-100">
                   <div className="relative h-60">
-                    <img src={tour.image} alt={tour.title} className="w-full h-full object-cover" />
+                    <img src={tour.image} alt={tour.title} className="w-full h-full object-cover" loading="lazy" />
                   </div>
                   <div className="p-8">
                     <h3 className="text-xl font-bold mb-3 text-black uppercase tracking-tight">{tour.title}</h3>
@@ -170,7 +171,7 @@ const Home: React.FC = () => {
               {testimonials.map((t, i) => (
                 <div key={i} className="bg-gray-50 p-8 rounded-3xl">
                   <div className="flex items-center mb-6">
-                    <img src={t.image} alt={t.name} className="w-10 h-10 rounded-full mr-4" />
+                    <img src={t.image} alt={t.name} className="w-10 h-10 rounded-full mr-4" loading="lazy" />
                     <div>
                       <h4 className="font-bold text-sm">{t.name}</h4>
                       <p className="text-xs text-gray-400">{t.location}</p>
@@ -206,6 +207,7 @@ const Home: React.FC = () => {
                         alt={post.title} 
                         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                         referrerPolicy="no-referrer"
+                        loading="lazy"
                       />
                     </div>
                     <div className="space-y-3">
