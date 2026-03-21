@@ -1,13 +1,16 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import SEO from '../components/SEO';
 import { useConfig } from '../context/ConfigContext';
-import { BLOG_POSTS } from '../constants/blog';
 
 const Home: React.FC = () => {
   const { config } = useConfig();
   
+  // Create a mobile-optimized version of your Cloudinary hero image
+  // This adds transformation parameters: c_scale (resize), w_800 (width), f_auto (format), q_auto (quality)
+  const desktopHero = config.pages.home.heroImage;
+  const mobileHero = desktopHero.replace('/upload/', '/upload/c_scale,w_800,f_auto,q_auto/');
+
   const testimonials = [
     {
       name: "Janice",
@@ -41,13 +44,23 @@ const Home: React.FC = () => {
 
       {/* Hero Section */}
       {config.design.homeSections.hero && (
-        <section className="relative h-[85vh] flex items-center overflow-hidden">
+        <section className="relative h-[85vh] flex items-center overflow-hidden bg-black">
           <div className="absolute inset-0 z-0">
-            <img 
-              src={config.pages.home.heroImage} 
-              alt="Cebu Scenic View" 
-              className="w-full h-full object-cover brightness-[0.45]"
-            />
+            <picture>
+              {/* Mobile optimized source */}
+              <source 
+                media="(max-width: 767px)" 
+                srcSet={mobileHero} 
+              />
+              {/* Default Desktop Image */}
+              <img 
+                src={desktopHero} 
+                alt="Cebu Scenic View" 
+                className="w-full h-full object-cover brightness-[0.45]"
+                fetchpriority="high" // Priority loading for LCP
+                loading="eager"      // Load immediately
+              />
+            </picture>
           </div>
           <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-white">
             <div className="max-w-3xl">
@@ -126,7 +139,7 @@ const Home: React.FC = () => {
                 <h2 className="text-3xl md:text-4xl font-bold text-black mb-4 uppercase tracking-tight">Affordable Cebu Tour Packages</h2>
                 <p className="text-gray-600">The most popular itineraries for local and international tourists.</p>
               </div>
-              <Link to="/services" className="hidden md:block text-brand font-bold hover:underline">View All &rarr;</Link>
+              <Link to="/services" className="hidden md:block text-brand font-bold hover:underline">View All →</Link>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -187,7 +200,7 @@ const Home: React.FC = () => {
                 <h2 className="text-3xl md:text-4xl font-bold text-black mb-4 uppercase tracking-tight">Cebu Travel Insights</h2>
                 <p className="text-gray-600">Expert tips and guides for your next trip.</p>
               </div>
-              <Link to="/blog" className="hidden md:block text-brand font-bold hover:underline">Read All Articles &rarr;</Link>
+              <Link to="/blog" className="hidden md:block text-brand font-bold hover:underline">Read All Articles →</Link>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
