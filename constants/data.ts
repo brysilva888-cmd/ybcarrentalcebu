@@ -19,7 +19,7 @@ export const TOURS: TourPackage[] = [
     id: "cebu-city-tour",
     title: "Cebu City Highlands Tour and 10K Roses",
     description: "Experience Cebu's scenic highlands and rich history in one day—iconic viewpoints, cultural landmarks, and must-see city attractions, topped off with great local food and pasalubong shopping.",
-    image: "https://res.cloudinary.com/dgwcfarmv/image/upload/v1774070304/cebu4-640_gvscty.png",
+    image: "https://lh3.googleusercontent.com/pw/AP1GczPdJEb9AFfsdepYmV7JAcujbr4EMbDSpjRSAXvwm_0uLMXov8wUVDEikBueLw_ygnq-9H5ylcv9uhoeovTamUHpvuKQUJzJCNslIRAM3xnSPrkzctc=w2400",
     highlights: [
       'Sirao Flower Garden',
       'Temple of Leah',
@@ -37,7 +37,7 @@ export const TOURS: TourPackage[] = [
     id: "south-cebu-adventure",
     title: "Oslob Day Tour",
     description: "Experience an unforgettable Cebu adventure with sunrise views, whale shark watching, pristine sandbars, refreshing waterfalls, and historic churches—plus a stop for famous Carcar lechon and pasalubong shopping.",
-    image: "https://res.cloudinary.com/dgwcfarmv/image/upload/v1774070495/whale-shark_hfcilm.png",
+    image: "https://lh3.googleusercontent.com/pw/AP1GczOQkMQw1uMI8fLv1anKeSuaEauQATcPfqupgW5Ijr2wkL0v0OORfMlYMNFWekG7w6sHCUdfDISVUzid1idWhBsjseciKdqkisDquQO9uTF9s2fiErg=w2400",
     highlights: [
       'Sunrise View at Tan-awan Oslob',
       'Whaleshark Watching',
@@ -54,7 +54,7 @@ export const TOURS: TourPackage[] = [
     id: 'moalboal-badian-canyoneering',
     title: 'Moalboal & Badian Kawasan Tour',
     description: 'The perfect adventure combo! Be amazed by the blue waters of Kawasan Falls and test your limits as you rappel, climb, jump, and swim through the clear blue lagoons of Badian canyoneering.',
-    image: "https://res.cloudinary.com/dgwcfarmv/image/upload/v1774070493/kawasan-600_gba576.png", 
+    image: 'https://lh3.googleusercontent.com/pw/AP1GczP-ZmI7_DBFt0x9TiXqivUAPdwMdbiPMuIHeuSCQk3Jf0B-5KqTpJuX26vcbvwoZ4hu9VqOSJZ09uUAOCVhhPtx-nzqi0PWWIK9JcevS_wovxXbIsA=w2400', 
     highlights: [
       'Sardines Run Encounter',
       'Turtle Watching',
@@ -71,7 +71,7 @@ export const TOURS: TourPackage[] = [
     id: "north-cebu-safari",
     title: "Cebu Safari & Adventure Park",
     description: "A world-class wildlife sanctuary and adventure park located in the hills of Carmen, Northern Cebu.",
-    image: "https://res.cloudinary.com/dgwcfarmv/image/upload/v1774070492/cebu-safari-640_bhmzlb.png",
+    image: "https://lh3.googleusercontent.com/pw/AP1GczPuySbgfyz9yuSTeXeui1Un76Cg2DPVaTiMuwUls2p6A21AJhBsnuS2Dy3A3pSP4XY5Pt8bdAYplimrjKm-3Zp2gNISp4epkBIOkXYdBuyaDhRoefg=w2400",
     highlights: ["Safari Tour", "White Lion Enclosure", "Bird Show", "Adventure Rides"]
   },
   {

@@ -43,9 +43,9 @@ I'm interested in this tour package. Please check availability for my group!`;
   return (
     <div className="bg-gray-50 min-h-screen relative">
       <SEO 
-        title="Cebu Car Rental Services | Airport Transfer & Private Tours" 
+        title="Cebu Tour Packages & Car Services | All-In Rates" 
         description="Browse our wide range of Cebu tour packages. From South Cebu canyoneering to North Cebu wildlife safaris, all include free driver and fuel."
-        keywords="Cebu tour car rental, Cebu city tour car rental, airport transfer Cebu, Cebu canyoneering package."
+        keywords="Cebu tour car rental, Cebu city tour car rental, airport transfer Cebu, Cebu canyoneering package"
       />
 
       {/* Redirecting Overlay for Messenger */}

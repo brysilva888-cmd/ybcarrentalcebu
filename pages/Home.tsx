@@ -1,17 +1,13 @@
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 import SEO from '../components/SEO';
 import { useConfig } from '../context/ConfigContext';
+import { BLOG_POSTS } from '../constants/blog';
 
 const Home: React.FC = () => {
   const { config } = useConfig();
   
-  // Direct url
-  const desktopHero = "https://res.cloudinary.com/dgwcfarmv/image/upload/v1774066057/cebu2_znrw8f.webp";
-  
-  // Optimized URL for Mobile
-  const mobileHero = "https://res.cloudinary.com/dgwcfarmv/image/upload/c_scale,w_800,f_auto,q_auto/v1774066057/cebu2_znrw8f.webp";
-
   const testimonials = [
     {
       name: "Janice",
@@ -45,30 +41,13 @@ const Home: React.FC = () => {
 
       {/* Hero Section */}
       {config.design.homeSections.hero && (
-        <section className="relative h-[85vh] flex items-center overflow-hidden bg-black">
-          <div className="absolute inset-0 z-0 w-full h-full">
-            <picture className="w-full h-full">
-              {/* MOBILE: Smaller, faster file */}
-              <source 
-                media="(max-width: 767px)" 
-                srcSet={mobileHero} 
-              />
-              {/* DESKTOP & FALLBACK: Full quality */}
-              <img 
-                src={desktopHero} 
-                alt="Premium Cebu Car Rental" 
-                className="w-full h-full object-cover brightness-[0.45]"
-                fetchpriority="high"
-                loading="eager"
-                onError={(e) => {
-                  // Safety mechanism: if mobileHero fails, load desktopHero instead
-                  const target = e.target as HTMLImageElement;
-                  if (target.src !== desktopHero) {
-                    target.src = desktopHero;
-                  }
-                }}
-              />
-            </picture>
+        <section className="relative h-[85vh] flex items-center overflow-hidden">
+          <div className="absolute inset-0 z-0">
+            <img 
+              src={config.pages.home.heroImage} 
+              alt="Cebu Scenic View" 
+              className="w-full h-full object-cover brightness-[0.45]"
+            />
           </div>
           <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-white">
             <div className="max-w-3xl">
@@ -100,7 +79,7 @@ const Home: React.FC = () => {
         </section>
       )}
 
-      {/* Why Choose Us Section */}
+      {/* Why Choose Us */}
       {config.design.homeSections.why && (
         <section className="py-24 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -147,7 +126,7 @@ const Home: React.FC = () => {
                 <h2 className="text-3xl md:text-4xl font-bold text-black mb-4 uppercase tracking-tight">Affordable Cebu Tour Packages</h2>
                 <p className="text-gray-600">The most popular itineraries for local and international tourists.</p>
               </div>
-              <Link to="/services" className="hidden md:block text-brand font-bold hover:underline">View All →</Link>
+              <Link to="/services" className="hidden md:block text-brand font-bold hover:underline">View All &rarr;</Link>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -173,7 +152,7 @@ const Home: React.FC = () => {
         </section>
       )}
 
-      {/* Testimonials Section */}
+      {/* Testimonials */}
       {config.design.homeSections.reviews && (
         <section className="py-24 bg-white">
           <div className="max-w-7xl mx-auto px-4">
@@ -208,7 +187,7 @@ const Home: React.FC = () => {
                 <h2 className="text-3xl md:text-4xl font-bold text-black mb-4 uppercase tracking-tight">Cebu Travel Insights</h2>
                 <p className="text-gray-600">Expert tips and guides for your next trip.</p>
               </div>
-              <Link to="/blog" className="hidden md:block text-brand font-bold hover:underline">Read All Articles →</Link>
+              <Link to="/blog" className="hidden md:block text-brand font-bold hover:underline">Read All Articles &rarr;</Link>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -244,7 +223,7 @@ const Home: React.FC = () => {
         </section>
       )}
 
-      {/* Final CTA Section */}
+      {/* Final CTA */}
       {config.design.homeSections.cta && (
         <section className="py-24 bg-brand text-white text-center">
           <div className="max-w-4xl mx-auto px-4">

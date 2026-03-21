@@ -99,7 +99,7 @@ I'm interested in this booking. Please check availability!`;
   return (
     <div className="bg-white min-h-screen relative">
       <SEO 
-        title="Contact YB Car Rental Cebu | Book a Car with Driver" 
+        title="Contact Us | Book Your Cebu Car Rental" 
         description="Book your Cebu car rental today. Contact YB Car Rental via WhatsApp or Facebook Messenger for inquiries about tours and airport transfers in Cebu."
         keywords="book car rental Cebu, Cebu car rental contact, rent car with driver Cebu, Messenger car rental Cebu, WhatsApp car rental Cebu"
       />
