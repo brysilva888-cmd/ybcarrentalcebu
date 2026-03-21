@@ -20,6 +20,12 @@
     "react-router-dom": "^7.11.0",
     "tailwindcss": "^4.2.2"
   },
+  "overrides": {
+    "react-quill": {
+      "react": "$react",
+      "react-dom": "$react-dom"
+    }
+  },
   "devDependencies": {
     "@tailwindcss/vite": "^4.2.2",
     "@types/node": "^22.14.0",
