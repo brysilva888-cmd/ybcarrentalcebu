@@ -19,7 +19,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 
   return (
     <div className="flex flex-col min-h-screen font-sans antialiased">
-      {/* INTEGRATED HEADER */}
+      {/* INTEGRATED HEADER - NO EXTERNAL FILES NEEDED */}
       <header className={`fixed w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-white shadow-md py-2' : 'bg-transparent py-4'}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
           <Link to="/" className={`text-2xl font-black tracking-tighter ${isScrolled ? 'text-brand' : 'text-white'}`}>
@@ -46,7 +46,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         </div>
         
         {isMobileMenuOpen && (
-          <div className="md:hidden bg-white w-full py-6 flex flex-col items-center space-y-4 shadow-2xl animate-in slide-in-from-top">
+          <div className="md:hidden bg-white w-full py-6 flex flex-col items-center space-y-4 shadow-2xl">
             {['Home', 'Services', 'Blog', 'Contact'].map((item) => (
               <Link key={item} to={item === 'Home' ? '/' : `/${item.toLowerCase()}`} onClick={() => setIsMobileMenuOpen(false)} className="text-black font-bold text-lg">
                 {item}
@@ -61,7 +61,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         {children}
       </main>
 
-      {/* INTEGRATED FOOTER (Replacing the missing Footer.tsx) */}
+      {/* INTEGRATED FOOTER */}
       <footer className="bg-gray-900 text-white py-12">
         <div className="max-w-7xl mx-auto px-4 text-center">
           <h2 className="text-xl font-bold mb-4">{config.business.name}</h2>
