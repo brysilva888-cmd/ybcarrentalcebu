@@ -6,10 +6,10 @@ import { useConfig } from '../context/ConfigContext';
 const Home: React.FC = () => {
   const { config } = useConfig();
   
-  // We are using the full image from your config for Desktop
+  // Base working URL from your data.ts
   const desktopHero = config.pages.home.heroImage;
   
-  // We use the HARDCODED optimized URL for Mobile (LCP Fix)
+  // Optimized URL for Mobile
   const mobileHero = "https://res.cloudinary.com/dgwcfarmv/image/upload/c_scale,w_800,f_auto,q_auto/v1774066057/cebu2_znrw8f.webp";
 
   const testimonials = [
@@ -46,20 +46,27 @@ const Home: React.FC = () => {
       {/* Hero Section */}
       {config.design.homeSections.hero && (
         <section className="relative h-[85vh] flex items-center overflow-hidden bg-black">
-          <div className="absolute inset-0 z-0">
-            <picture>
-              {/* MOBILE: Uses the hardcoded optimized link */}
+          <div className="absolute inset-0 z-0 w-full h-full">
+            <picture className="w-full h-full">
+              {/* MOBILE: Smaller, faster file */}
               <source 
                 media="(max-width: 767px)" 
                 srcSet={mobileHero} 
               />
-              {/* DESKTOP: Uses the link from your config */}
+              {/* DESKTOP & FALLBACK: Full quality */}
               <img 
                 src={desktopHero} 
-                alt="Cebu Scenic View" 
+                alt="Premium Cebu Car Rental" 
                 className="w-full h-full object-cover brightness-[0.45]"
-                fetchpriority="high" // High priority for PageSpeed
-                loading="eager"      // No lazy loading for the main banner
+                fetchpriority="high"
+                loading="eager"
+                onError={(e) => {
+                  // Safety mechanism: if mobileHero fails, load desktopHero instead
+                  const target = e.target as HTMLImageElement;
+                  if (target.src !== desktopHero) {
+                    target.src = desktopHero;
+                  }
+                }}
               />
             </picture>
           </div>
