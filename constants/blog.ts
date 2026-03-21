@@ -10,6 +10,9 @@ export interface BlogPost {
   content: string; // HTML content from rich text editor
   published?: boolean;
   updatedAt?: string;
+  seoTitle?: string;
+  seoDescription?: string;
+  seoKeywords?: string;
 }
 
 export const BLOG_POSTS: BlogPost[] = [

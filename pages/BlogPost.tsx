@@ -13,10 +13,11 @@ const BlogPost: React.FC = () => {
   }
 
   // Create highly optimized unique title and description
-  const optimizedTitle = `${post.title} - Cebu Travel Guide`;
-  const optimizedDescription = post.excerpt.length > 160 
+  const optimizedTitle = post.seoTitle || `${post.title} - Cebu Travel Guide`;
+  const optimizedDescription = post.seoDescription || (post.excerpt.length > 160 
     ? post.excerpt.substring(0, 157) + "..." 
-    : post.excerpt;
+    : post.excerpt);
+  const optimizedKeywords = post.seoKeywords || `${post.category}, Cebu travel tips, ${post.title.split(' ').join(', ')}, YB Car Rental`;
 
   // Generate structured data for the blog post
   const jsonLd = {
@@ -50,7 +51,7 @@ const BlogPost: React.FC = () => {
       <SEO 
         title={optimizedTitle} 
         description={optimizedDescription} 
-        keywords={`${post.category}, Cebu travel tips, ${post.title.split(' ').join(', ')}, YB Car Rental`}
+        keywords={optimizedKeywords}
         image={post.image}
       />
       

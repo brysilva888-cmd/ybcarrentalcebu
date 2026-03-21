@@ -174,6 +174,38 @@ const BlogManager: React.FC = () => {
                     </span>
                   </label>
                 </div>
+
+                <div className="bg-gray-50 p-6 rounded-2xl space-y-4 border border-gray-100">
+                  <h3 className="text-xs font-black uppercase tracking-widest text-gray-400 border-b border-gray-200 pb-2">SEO Settings (Optional)</h3>
+                  <div>
+                    <label className="block text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-1">SEO Title Override</label>
+                    <input 
+                      className="w-full p-2 bg-white rounded-lg outline-none focus:ring-1 focus:ring-black text-xs"
+                      placeholder="Custom title for Google search..."
+                      value={editingPost.seoTitle || ''}
+                      onChange={(e) => setEditingPost({ ...editingPost, seoTitle: e.target.value })}
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-1">SEO Description Override</label>
+                    <textarea 
+                      rows={2}
+                      className="w-full p-2 bg-white rounded-lg outline-none focus:ring-1 focus:ring-black text-xs"
+                      placeholder="Custom meta description..."
+                      value={editingPost.seoDescription || ''}
+                      onChange={(e) => setEditingPost({ ...editingPost, seoDescription: e.target.value })}
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-1">SEO Keywords</label>
+                    <input 
+                      className="w-full p-2 bg-white rounded-lg outline-none focus:ring-1 focus:ring-black text-xs"
+                      placeholder="keyword1, keyword2, keyword3..."
+                      value={editingPost.seoKeywords || ''}
+                      onChange={(e) => setEditingPost({ ...editingPost, seoKeywords: e.target.value })}
+                    />
+                  </div>
+                </div>
               </div>
             </div>
           </div>
