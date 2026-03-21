@@ -6,10 +6,11 @@ import { useConfig } from '../context/ConfigContext';
 const Home: React.FC = () => {
   const { config } = useConfig();
   
-  // Create a mobile-optimized version of your Cloudinary hero image
-  // This adds transformation parameters: c_scale (resize), w_800 (width), f_auto (format), q_auto (quality)
+  // We are using the full image from your config for Desktop
   const desktopHero = config.pages.home.heroImage;
-  const mobileHero = desktopHero.replace('/upload/', '/upload/c_scale,w_800,f_auto,q_auto/');
+  
+  // We use the HARDCODED optimized URL for Mobile (LCP Fix)
+  const mobileHero = "https://res.cloudinary.com/dgwcfarmv/image/upload/c_scale,w_800,f_auto,q_auto/v1774066057/cebu2_znrw8f.webp";
 
   const testimonials = [
     {
@@ -47,18 +48,18 @@ const Home: React.FC = () => {
         <section className="relative h-[85vh] flex items-center overflow-hidden bg-black">
           <div className="absolute inset-0 z-0">
             <picture>
-              {/* Mobile optimized source */}
+              {/* MOBILE: Uses the hardcoded optimized link */}
               <source 
                 media="(max-width: 767px)" 
                 srcSet={mobileHero} 
               />
-              {/* Default Desktop Image */}
+              {/* DESKTOP: Uses the link from your config */}
               <img 
                 src={desktopHero} 
                 alt="Cebu Scenic View" 
                 className="w-full h-full object-cover brightness-[0.45]"
-                fetchpriority="high" // Priority loading for LCP
-                loading="eager"      // Load immediately
+                fetchpriority="high" // High priority for PageSpeed
+                loading="eager"      // No lazy loading for the main banner
               />
             </picture>
           </div>
@@ -92,7 +93,7 @@ const Home: React.FC = () => {
         </section>
       )}
 
-      {/* Why Choose Us */}
+      {/* Why Choose Us Section */}
       {config.design.homeSections.why && (
         <section className="py-24 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -165,7 +166,7 @@ const Home: React.FC = () => {
         </section>
       )}
 
-      {/* Testimonials */}
+      {/* Testimonials Section */}
       {config.design.homeSections.reviews && (
         <section className="py-24 bg-white">
           <div className="max-w-7xl mx-auto px-4">
@@ -236,7 +237,7 @@ const Home: React.FC = () => {
         </section>
       )}
 
-      {/* Final CTA */}
+      {/* Final CTA Section */}
       {config.design.homeSections.cta && (
         <section className="py-24 bg-brand text-white text-center">
           <div className="max-w-4xl mx-auto px-4">
