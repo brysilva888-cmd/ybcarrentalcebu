@@ -5,12 +5,17 @@ import 'react-quill/dist/quill.snow.css';
 import { useConfig } from '../context/ConfigContext';
 import { BlogPost } from '../constants/blog';
 
-const BlogManager: React.FC = () => {
+const BlogManager: React.FC<{
+  editingPost: BlogPost | null;
+  setEditingPost: (post: BlogPost | null) => void;
+  view: 'list' | 'edit';
+  setView: (view: 'list' | 'edit') => void;
+  originalSlug: string | null;
+  setOriginalSlug: (slug: string | null) => void;
+  createNewPost: () => void;
+}> = ({ editingPost, setEditingPost, view, setView, originalSlug, setOriginalSlug, createNewPost }) => {
   const { config, updateConfig } = useConfig();
-  const [editingPost, setEditingPost] = useState<BlogPost | null>(null);
-  const [originalSlug, setOriginalSlug] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
-  const [view, setView] = useState<'list' | 'edit'>('list');
   const [statusFilter, setStatusFilter] = useState<'all' | 'published' | 'draft'>('all');
   const [editorMode, setEditorMode] = useState<'visual' | 'text'>('visual');
   const [collapsedSections, setCollapsedSections] = useState<Record<string, boolean>>({});
@@ -18,6 +23,7 @@ const BlogManager: React.FC = () => {
   const [quickEditingSlug, setQuickEditingSlug] = useState<string | null>(null);
   const [showMediaModal, setShowMediaModal] = useState(false);
   const [mediaUrl, setMediaUrl] = useState('');
+  const [saveStatus, setSaveStatus] = useState<'idle' | 'saving' | 'success' | 'error'>('idle');
 
   const toggleSection = (section: string) => {
     setCollapsedSections(prev => ({ ...prev, [section]: !prev[section] }));
@@ -33,31 +39,46 @@ const BlogManager: React.FC = () => {
   });
 
   const handleSave = (post: BlogPost) => {
-    console.log('Saving post:', post);
-    let updatedBlog;
+    if (!post.title.trim()) {
+      alert('Please enter a title before saving.');
+      return;
+    }
+
+    setSaveStatus('saving');
     
-    // Check if we are updating an existing post
-    const isUpdating = originalSlug && !originalSlug.startsWith('new-post');
-    
-    if (isUpdating) {
-      updatedBlog = config.blog.map(p => p.slug === originalSlug ? post : p);
-      updateConfig({ blog: updatedBlog });
-    } else {
-      // Adding new post
-      // Check if slug already exists to avoid duplicates if user clicks multiple times
-      const exists = config.blog.some(p => p.slug === post.slug);
-      if (exists) {
-        updatedBlog = config.blog.map(p => p.slug === post.slug ? post : p);
+    try {
+      let updatedBlog;
+      
+      // Check if we are updating an existing post
+      const isUpdating = originalSlug && !originalSlug.startsWith('new-post');
+      
+      if (isUpdating) {
+        updatedBlog = config.blog.map(p => p.slug === originalSlug ? post : p);
         updateConfig({ blog: updatedBlog });
       } else {
-        updateConfig({ blog: [post, ...config.blog] });
+        // Adding new post
+        // Check if slug already exists to avoid duplicates if user clicks multiple times
+        const exists = config.blog.some(p => p.slug === post.slug);
+        if (exists) {
+          updatedBlog = config.blog.map(p => p.slug === post.slug ? post : p);
+          updateConfig({ blog: updatedBlog });
+        } else {
+          updateConfig({ blog: [post, ...config.blog] });
+        }
       }
+      
+      setSaveStatus('success');
+      setTimeout(() => {
+        setView('list');
+        setEditingPost(null);
+        setOriginalSlug(null);
+        setQuickEditingSlug(null);
+        setSaveStatus('idle');
+      }, 1000);
+    } catch (error) {
+      console.error('Error saving post:', error);
+      setSaveStatus('error');
     }
-    
-    setView('list');
-    setEditingPost(null);
-    setOriginalSlug(null);
-    setQuickEditingSlug(null);
   };
 
   const handleDelete = (slug: string) => {
@@ -83,24 +104,6 @@ const BlogManager: React.FC = () => {
     }
   };
 
-  const createNewPost = () => {
-    const newPost: BlogPost = {
-      slug: `new-post-${Date.now()}`,
-      title: '',
-      excerpt: '',
-      date: new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }),
-      author: 'YB Team',
-      image: '',
-      category: 'Travel Guide',
-      content: '',
-      published: false,
-      updatedAt: new Date().toISOString()
-    };
-    setEditingPost(newPost);
-    setOriginalSlug(newPost.slug);
-    setView('edit');
-  };
-
   if (view === 'edit' && editingPost) {
     return (
       <div className="max-w-[1200px] mx-auto animate-in fade-in slide-in-from-bottom-4 duration-500 pb-20">
@@ -110,10 +113,13 @@ const BlogManager: React.FC = () => {
               {originalSlug?.startsWith('new-post') ? 'Add New Post' : 'Edit Post'}
             </h1>
             <button 
-              onClick={createNewPost}
-              className="px-2 py-1 border border-[#ccc] rounded bg-[#f7f7f7] text-[#0071a1] text-xs font-semibold hover:bg-[#eee] transition-colors"
+              onClick={() => handleSave({ ...editingPost, published: true })}
+              disabled={saveStatus === 'saving'}
+              className={`px-4 py-1.5 rounded text-xs font-semibold shadow-[0_1px_0_#006799] transition-all ${
+                saveStatus === 'saving' ? 'bg-gray-400 cursor-not-allowed' : 'bg-[#0071a1] text-white hover:bg-[#006799]'
+              }`}
             >
-              Add New
+              {saveStatus === 'saving' ? 'Saving...' : (editingPost.published ? 'Update' : 'Publish')}
             </button>
           </div>
           <button 
@@ -123,6 +129,18 @@ const BlogManager: React.FC = () => {
             ← Back to All Posts
           </button>
         </div>
+
+        {saveStatus === 'success' && (
+          <div className="mb-6 p-3 bg-[#fff] border-l-4 border-[#46b450] shadow-sm text-sm text-[#23282d] animate-in fade-in slide-in-from-left-2">
+            Post {editingPost.published ? 'updated' : 'published'}. <button onClick={() => setView('list')} className="text-[#0071a1] underline ml-2">View all posts</button>
+          </div>
+        )}
+
+        {saveStatus === 'error' && (
+          <div className="mb-6 p-3 bg-[#fff] border-l-4 border-[#dc3232] shadow-sm text-sm text-[#23282d]">
+            An error occurred while saving. Please try again.
+          </div>
+        )}
 
         <div className="flex flex-col lg:flex-row gap-6">
           <div className="flex-grow space-y-6">
@@ -294,9 +312,12 @@ const BlogManager: React.FC = () => {
                     </button>
                     <button 
                       onClick={() => handleSave({ ...editingPost, published: true })}
-                      className="px-4 py-1.5 bg-[#0071a1] text-white rounded text-xs font-semibold hover:bg-[#006799] shadow-[0_1px_0_#006799]"
+                      disabled={saveStatus === 'saving'}
+                      className={`px-4 py-1.5 rounded text-xs font-semibold shadow-[0_1px_0_#006799] transition-all ${
+                        saveStatus === 'saving' ? 'bg-gray-400 cursor-not-allowed' : 'bg-[#0071a1] text-white hover:bg-[#006799]'
+                      }`}
                     >
-                      {editingPost.published ? 'Update' : 'Publish'}
+                      {saveStatus === 'saving' ? 'Saving...' : (editingPost.published ? 'Update' : 'Publish')}
                     </button>
                   </div>
                 </>
@@ -755,6 +776,30 @@ const Admin: React.FC = () => {
   const [password, setPassword] = useState('');
   const [isAuthorized, setIsAuthorized] = useState(false);
 
+  // Blog Management State (Lifted)
+  const [editingPost, setEditingPost] = useState<BlogPost | null>(null);
+  const [originalSlug, setOriginalSlug] = useState<string | null>(null);
+  const [blogView, setBlogView] = useState<'list' | 'edit'>('list');
+
+  const createNewPost = () => {
+    const newPost: BlogPost = {
+      slug: `new-post-${Date.now()}`,
+      title: '',
+      excerpt: '',
+      date: new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }),
+      author: 'YB Team',
+      image: '',
+      category: 'Travel Guide',
+      content: '',
+      published: false,
+      updatedAt: new Date().toISOString()
+    };
+    setEditingPost(newPost);
+    setOriginalSlug(newPost.slug);
+    setBlogView('edit');
+    setActiveTab('blog');
+  };
+
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
     if (password === 'admin123') { // Simple password for demo
@@ -796,7 +841,13 @@ const Admin: React.FC = () => {
 
   const SidebarButton = ({ tab, label, icon }: { tab: TabType, label: string, icon: string }) => (
     <button 
-      onClick={() => setActiveTab(tab)}
+      onClick={() => {
+        setActiveTab(tab);
+        if (tab === 'blog') {
+          setBlogView('list');
+          setEditingPost(null);
+        }
+      }}
       className={`w-full text-left px-4 py-2 text-sm transition-all flex items-center space-x-3 ${
         activeTab === tab 
           ? 'bg-[#0071a1] text-white' 
@@ -813,17 +864,20 @@ const Admin: React.FC = () => {
       {/* WordPress Top Bar */}
       <div className="h-8 bg-[#23282d] text-[#eee] flex items-center justify-between px-4 fixed top-0 left-0 right-0 z-[100] text-sm">
         <div className="flex items-center space-x-4">
-          <div className="flex items-center space-x-2 hover:bg-[#32373c] px-2 h-full cursor-pointer">
+          <a href="/" target="_blank" rel="noopener noreferrer" className="flex items-center space-x-2 hover:bg-[#32373c] px-2 h-full cursor-pointer transition-colors">
             <span className="text-lg">🏠</span>
             <span className="font-semibold">{config.business.name}</span>
-          </div>
-          <div className="flex items-center space-x-2 hover:bg-[#32373c] px-2 h-full cursor-pointer">
+          </a>
+          <div 
+            onClick={createNewPost}
+            className="flex items-center space-x-2 hover:bg-[#32373c] px-2 h-full cursor-pointer transition-colors"
+          >
             <span className="text-lg">➕</span>
-            <span>New</span>
+            <span>New Post</span>
           </div>
         </div>
         <div className="flex items-center space-x-4">
-          <div className="flex items-center space-x-2 hover:bg-[#32373c] px-2 h-full cursor-pointer">
+          <div className="flex items-center space-x-2 hover:bg-[#32373c] px-2 h-full cursor-pointer transition-colors">
             <span>Howdy, Admin</span>
             <div className="w-5 h-5 bg-gray-500 rounded-full flex items-center justify-center text-[10px]">👤</div>
           </div>
@@ -1110,7 +1164,15 @@ const Admin: React.FC = () => {
             )}
 
             {activeTab === 'blog' && (
-              <BlogManager />
+              <BlogManager 
+                editingPost={editingPost}
+                setEditingPost={setEditingPost}
+                view={blogView}
+                setView={setBlogView}
+                originalSlug={originalSlug}
+                setOriginalSlug={setOriginalSlug}
+                createNewPost={createNewPost}
+              />
             )}
 
             {activeTab === 'navigation' && (
