@@ -27,7 +27,7 @@ const DEFAULT_CONFIG = {
     }
   },
   seo: {
-    home: { title: 'Car Rental Cebu | Best Tour Car Rental', description: 'Looking for the best car rental in Cebu? YB Car Rental offers premium tour packages.' },
+    home: { title: 'Cebu Car Rental with Driver and Free Fuel', description: 'Looking for a Cebu car rental with driver and free fuel? YB Car Rental offers all-inclusive tour packages for a stress-free travel experience in Cebu.' },
     about: { title: 'About Us', description: 'Learn more about YB Car Rental and Tour.' },
     services: { title: 'Cebu Tour Packages & Car Services', description: 'Browse our wide range of Cebu tour packages.' },
     contact: { title: 'Contact Us | Book Your Cebu Car Rental', description: 'Book your Cebu car rental today.' },
@@ -35,8 +35,8 @@ const DEFAULT_CONFIG = {
   },
   pages: {
     home: {
-      heroTitle: "Premium Cebu Car Rental with FREE Driver & Fuel.",
-      heroSubtitle: "Explore the scenic roads and hidden gems of Cebu with our stress-free, all-inclusive tour packages.",
+      heroTitle: "Cebu Car Rental with Driver and Free Fuel.",
+      heroSubtitle: "The most affordable and stress-free way to explore Cebu. Our all-inclusive packages include a professional driver and full fuel coverage.",
       heroImage: "https://res.cloudinary.com/dgwcfarmv/image/upload/v1774066057/cebu2_znrw8f.webp",
       heroImageMobile: "https://res.cloudinary.com/dgwcfarmv/image/upload/c_scale,w_800,f_auto,q_auto/v1774066057/cebu2_znrw8f.webp"
     }
