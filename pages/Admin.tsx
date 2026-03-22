@@ -53,18 +53,21 @@ const BlogManager: React.FC<{
       const isUpdating = originalSlug && !originalSlug.startsWith('new-post');
       
       if (isUpdating) {
+        // When updating, we replace the post that matches the original slug
         updatedBlog = config.blog.map(p => p.slug === originalSlug ? post : p);
         updateConfig({ blog: updatedBlog });
       } else {
         // Adding new post
-        // Check if slug already exists to avoid duplicates if user clicks multiple times
-        const exists = config.blog.some(p => p.slug === post.slug);
-        if (exists) {
-          updatedBlog = config.blog.map(p => p.slug === post.slug ? post : p);
-          updateConfig({ blog: updatedBlog });
-        } else {
-          updateConfig({ blog: [post, ...config.blog] });
+        // Ensure slug is unique for new posts
+        let finalSlug = post.slug;
+        let counter = 1;
+        while (config.blog.some(p => p.slug === finalSlug)) {
+          finalSlug = `${post.slug}-${counter}`;
+          counter++;
         }
+        
+        const postToSave = { ...post, slug: finalSlug };
+        updateConfig({ blog: [postToSave, ...config.blog] });
       }
       
       setSaveStatus('success');
@@ -74,7 +77,7 @@ const BlogManager: React.FC<{
         setOriginalSlug(null);
         setQuickEditingSlug(null);
         setSaveStatus('idle');
-      }, 1000);
+      }, 1500);
     } catch (error) {
       console.error('Error saving post:', error);
       setSaveStatus('error');
@@ -150,7 +153,12 @@ const BlogManager: React.FC<{
               value={editingPost.title}
               onChange={(e) => {
                 const title = e.target.value;
-                const slug = title.toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-');
+                // Generate slug but don't force it if it's an existing post (unless they want to change it)
+                const slug = title.toLowerCase()
+                  .replace(/[^\w\s-]/g, '')
+                  .replace(/\s+/g, '-')
+                  .replace(/--+/g, '-')
+                  .trim();
                 setEditingPost({ ...editingPost, title, slug });
               }}
             />
@@ -950,6 +958,48 @@ const Admin: React.FC = () => {
                         className="flex-grow p-2 border border-[#ddd] focus:border-[#5b9dd9] outline-none text-sm"
                         value={config.business.messenger}
                         onChange={(e) => updateConfig({ business: { ...config.business, messenger: e.target.value } })}
+                      />
+                    </div>
+                    <div className="flex flex-col md:flex-row md:items-center">
+                      <label className="w-full md:w-1/4 text-sm font-semibold text-[#23282d]">Facebook Link</label>
+                      <input 
+                        type="text" 
+                        className="flex-grow p-2 border border-[#ddd] focus:border-[#5b9dd9] outline-none text-sm"
+                        value={config.business.socials.facebook}
+                        onChange={(e) => updateConfig({ 
+                          business: { 
+                            ...config.business, 
+                            socials: { ...config.business.socials, facebook: e.target.value } 
+                          } 
+                        })}
+                      />
+                    </div>
+                    <div className="flex flex-col md:flex-row md:items-center">
+                      <label className="w-full md:w-1/4 text-sm font-semibold text-[#23282d]">TikTok Link</label>
+                      <input 
+                        type="text" 
+                        className="flex-grow p-2 border border-[#ddd] focus:border-[#5b9dd9] outline-none text-sm"
+                        value={config.business.socials.tiktok}
+                        onChange={(e) => updateConfig({ 
+                          business: { 
+                            ...config.business, 
+                            socials: { ...config.business.socials, tiktok: e.target.value } 
+                          } 
+                        })}
+                      />
+                    </div>
+                    <div className="flex flex-col md:flex-row md:items-center">
+                      <label className="w-full md:w-1/4 text-sm font-semibold text-[#23282d]">Instagram Link</label>
+                      <input 
+                        type="text" 
+                        className="flex-grow p-2 border border-[#ddd] focus:border-[#5b9dd9] outline-none text-sm"
+                        value={config.business.socials.instagram}
+                        onChange={(e) => updateConfig({ 
+                          business: { 
+                            ...config.business, 
+                            socials: { ...config.business.socials, instagram: e.target.value } 
+                          } 
+                        })}
                       />
                     </div>
                   </div>

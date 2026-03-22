@@ -9,7 +9,8 @@ export const BUSINESS_INFO = {
   whatsapp: "639615727423",
   messenger: "ybcarrentalcebu",
   socials: {
-    facebook: "https://www.facebook.com/ybcarrentalcebu",
+    facebook: "https://www.facebook.com/ybcarrentalcebu/",
+    tiktok: "https://www.tiktok.com/@ybcarrentcebu",
     instagram: "https://instagram.com/ybcarrentaltours"
   }
 };

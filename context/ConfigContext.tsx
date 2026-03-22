@@ -54,7 +54,26 @@ const ConfigContext = createContext<{
 export const ConfigProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [config, setConfig] = useState<ConfigType>(() => {
     const saved = localStorage.getItem('yb_car_rental_config');
-    return saved ? JSON.parse(saved) : DEFAULT_CONFIG;
+    if (!saved) return DEFAULT_CONFIG;
+    
+    try {
+      const parsed = JSON.parse(saved);
+      // Deep merge business info to ensure new social links are picked up
+      return {
+        ...DEFAULT_CONFIG,
+        ...parsed,
+        business: {
+          ...DEFAULT_CONFIG.business,
+          ...(parsed.business || {}),
+          socials: {
+            ...DEFAULT_CONFIG.business.socials,
+            ...(parsed.business?.socials || {})
+          }
+        }
+      };
+    } catch (e) {
+      return DEFAULT_CONFIG;
+    }
   });
 
   useEffect(() => {

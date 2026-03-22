@@ -49,6 +49,7 @@ const SchemaMarkup: React.FC = () => {
     },
     "sameAs": [
       BUSINESS_INFO.socials.facebook,
+      BUSINESS_INFO.socials.tiktok,
       BUSINESS_INFO.socials.instagram
     ]
   };
