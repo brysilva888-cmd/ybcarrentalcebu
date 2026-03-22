@@ -22,13 +22,25 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   const isHomePage = location.pathname === '/';
   const showSolidHeader = isScrolled || !isHomePage;
 
+  const isAdminPage = location.pathname.startsWith('/admin');
+
+  if (isAdminPage) {
+    return (
+      <div className="flex flex-col min-h-screen font-sans antialiased">
+        <main className="flex-grow">
+          {children}
+        </main>
+      </div>
+    );
+  }
+
   return (
     <div className="flex flex-col min-h-screen font-sans antialiased">
       <SchemaMarkup />
       {/* INTEGRATED HEADER */}
       <header className={`fixed w-full z-50 transition-all duration-300 ${showSolidHeader ? 'bg-white shadow-md py-2' : 'bg-transparent py-3 md:py-4'}`}>
         <div className="max-w-7xl mx-auto px-6 sm:px-6 lg:px-8 flex justify-between items-center">
-          <Link to="/" className={`flex flex-col group ${showSolidHeader ? 'text-brand' : 'text-white'}`}>
+          <Link to="/" className={`flex flex-col group ${showSolidHeader ? 'text-[#dc2626]' : 'text-white'}`}>
             <span className="text-xl md:text-2xl font-black uppercase tracking-tighter leading-none">
               {config.business.name}
             </span>

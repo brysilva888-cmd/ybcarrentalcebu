@@ -40,7 +40,7 @@ const Home: React.FC = () => {
 
       {/* Hero Section */}
       {config.design.homeSections.hero && (
-        <section className="relative min-h-[85vh] flex items-center overflow-hidden">
+        <section className="relative min-h-[85vh] flex items-center overflow-hidden bg-gray-900">
           <div className="absolute inset-0 z-0">
             <picture>
               <source 
