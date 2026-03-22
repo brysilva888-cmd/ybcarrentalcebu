@@ -2,6 +2,7 @@ import React, { Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ConfigProvider } from './context/ConfigContext';
 import Layout from './components/Layout';
+import ScrollToTop from './components/ScrollToTop';
 
 // Simple Inline Spinner to replace the missing file
 const PageLoader = () => (
@@ -25,6 +26,7 @@ const App: React.FC = () => {
   return (
     <ConfigProvider>
       <Router>
+        <ScrollToTop />
         <Layout>
           {/* Suspense handles the "loading" state using our new PageLoader */}
           <Suspense fallback={<PageLoader />}>
