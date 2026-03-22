@@ -145,7 +145,7 @@ const Home: React.FC = () => {
                     <h3 className="text-xl font-bold mb-3 text-black uppercase tracking-tight">{tour.title}</h3>
                     <p className="text-gray-600 text-sm mb-6 line-clamp-2">{tour.description}</p>
                     <Link 
-                      to="/contact" 
+                      to="https://ybcarrentalcebu.com/contact" 
                       className="block w-full text-center border-2 border-brand text-brand font-bold py-3 rounded-xl hover:bg-brand hover:text-white transition-all uppercase tracking-widest text-xs"
                     >
                       Check Availability
