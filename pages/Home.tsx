@@ -129,7 +129,7 @@ const Home: React.FC = () => {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex flex-col md:flex-row justify-between items-end mb-16">
               <div className="max-w-xl">
-                <h2 className="text-3xl md:text-4xl font-bold text-black mb-4 uppercase tracking-tight">Cebu Car Rental with Driver and Free Fuel Packages</h2>
+                <h2 className="text-3xl md:text-4xl font-bold text-black mb-4 uppercase tracking-tight">Cebu Car Rental with Driver & FREE Fuel Packages</h2>
                 <p className="text-gray-600">The most affordable and convenient itineraries for local and international tourists.</p>
               </div>
               <Link to="/services" className="hidden md:block text-brand font-bold hover:underline">View All &rarr;</Link>
