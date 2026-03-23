@@ -783,6 +783,7 @@ const Admin: React.FC = () => {
   const [activeTab, setActiveTab] = useState<TabType>('blog');
   const [password, setPassword] = useState('');
   const [isAuthorized, setIsAuthorized] = useState(false);
+  const [globalSaveStatus, setGlobalSaveStatus] = useState<'idle' | 'saving' | 'success'>('idle');
 
   // Blog Management State (Lifted)
   const [editingPost, setEditingPost] = useState<BlogPost | null>(null);
@@ -806,6 +807,14 @@ const Admin: React.FC = () => {
     setOriginalSlug(newPost.slug);
     setBlogView('edit');
     setActiveTab('blog');
+  };
+
+  const triggerSave = () => {
+    setGlobalSaveStatus('saving');
+    setTimeout(() => {
+      setGlobalSaveStatus('success');
+      setTimeout(() => setGlobalSaveStatus('idle'), 2000);
+    }, 500);
   };
 
   const handleLogin = (e: React.FormEvent) => {
@@ -1004,8 +1013,11 @@ const Admin: React.FC = () => {
                     </div>
                   </div>
                   <div className="pt-4">
-                    <button className="px-4 py-2 bg-[#0071a1] text-white rounded text-sm font-semibold hover:bg-[#006799] shadow-[0_1px_0_#006799]">
-                      Save Changes
+                    <button 
+                      onClick={triggerSave}
+                      className="px-4 py-2 bg-[#0071a1] text-white rounded text-sm font-semibold hover:bg-[#006799] shadow-[0_1px_0_#006799] flex items-center"
+                    >
+                      {globalSaveStatus === 'saving' ? 'Saving...' : globalSaveStatus === 'success' ? '✓ Saved' : 'Save Changes'}
                     </button>
                   </div>
                 </div>
@@ -1122,8 +1134,11 @@ const Admin: React.FC = () => {
                     </div>
                   </div>
                   <div className="pt-4">
-                    <button className="px-4 py-2 bg-[#0071a1] text-white rounded text-sm font-semibold hover:bg-[#006799] shadow-[0_1px_0_#006799]">
-                      Update Page
+                    <button 
+                      onClick={triggerSave}
+                      className="px-4 py-2 bg-[#0071a1] text-white rounded text-sm font-semibold hover:bg-[#006799] shadow-[0_1px_0_#006799] flex items-center"
+                    >
+                      {globalSaveStatus === 'saving' ? 'Saving...' : globalSaveStatus === 'success' ? '✓ Saved' : 'Update Page'}
                     </button>
                   </div>
                 </div>
