@@ -22,18 +22,6 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   const isHomePage = location.pathname === '/';
   const showSolidHeader = isScrolled || !isHomePage;
 
-  const isAdminPage = location.pathname.startsWith('/admin');
-
-  if (isAdminPage) {
-    return (
-      <div className="flex flex-col min-h-screen font-sans antialiased">
-        <main className="flex-grow">
-          {children}
-        </main>
-      </div>
-    );
-  }
-
   return (
     <div className="flex flex-col min-h-screen font-sans antialiased">
       <SchemaMarkup />
@@ -180,7 +168,6 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             <div className="mt-4 md:mt-0 flex space-x-6">
               <Link to="/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</Link>
               <Link to="/terms-of-service" className="hover:text-white transition-colors">Terms of Service</Link>
-              <Link to="/admin" className="opacity-30 hover:opacity-100">Admin</Link>
             </div>
           </div>
         </div>

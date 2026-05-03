@@ -3,7 +3,7 @@ import { TourPackage } from '../types';
 
 export const BUSINESS_INFO = {
   name: "YB Car Rental Cebu",
-  tagline: "DRIVER AND FREE FUEL INCLUDED",
+  tagline: "Driver and FREE Fuel Included",
   address: "Cebu City, Philippines",
   phone: "+63 961 572 7423",
   whatsapp: "639615727423",

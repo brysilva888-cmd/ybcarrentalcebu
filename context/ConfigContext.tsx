@@ -55,13 +55,26 @@ export const ConfigProvider: React.FC<{ children: React.ReactNode }> = ({ childr
     try {
       const parsed = JSON.parse(saved);
       
-      // Force update heroTitle if it contains old versions
-      if (parsed.pages?.home?.heroTitle?.includes('FREE Driver') || 
-          parsed.pages?.home?.heroTitle?.includes('Premium Cebu Car Rental') ||
-          parsed.pages?.home?.heroTitle?.includes('Private Car Rentals') ||
-          parsed.pages?.home?.heroTitle?.includes('—') ||
-          parsed.pages?.home?.heroTitle?.includes('Fuel Included')) {
-        parsed.pages.home.heroTitle = DEFAULT_CONFIG.pages.home.heroTitle;
+      // Force update tagline if it contains any known old versions
+      const currentTagline = parsed.business?.tagline || '';
+      if (currentTagline.toLowerCase().includes('most reliable') || 
+          currentTagline.toUpperCase().includes('FUEL INCLUDED')) {
+        if (parsed.business) {
+          parsed.business.tagline = DEFAULT_CONFIG.business.tagline;
+        }
+      }
+
+      // Force update hero sections if they contain old versions
+      const currentHeroTitle = parsed.pages?.home?.heroTitle || '';
+      if (currentHeroTitle.includes('FREE Driver') || 
+          currentHeroTitle.includes('Premium Cebu Car Rental') ||
+          currentHeroTitle.includes('Private Car Rentals') ||
+          currentHeroTitle.includes('—') ||
+          currentHeroTitle.toLowerCase().includes('fuel included')) {
+        if (parsed.pages?.home) {
+          parsed.pages.home.heroTitle = DEFAULT_CONFIG.pages.home.heroTitle;
+          parsed.pages.home.heroSubtitle = DEFAULT_CONFIG.pages.home.heroSubtitle;
+        }
       }
 
       // Deep merge business info to ensure new social links are picked up
