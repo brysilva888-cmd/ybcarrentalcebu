@@ -58,6 +58,12 @@ export const ConfigProvider: React.FC<{ children: React.ReactNode }> = ({ childr
     
     try {
       const parsed = JSON.parse(saved);
+      
+      // Force update heroTitle if it contains the old "FREE Driver" text
+      if (parsed.pages?.home?.heroTitle?.includes('FREE Driver')) {
+        parsed.pages.home.heroTitle = DEFAULT_CONFIG.pages.home.heroTitle;
+      }
+
       // Deep merge business info to ensure new social links are picked up
       return {
         ...DEFAULT_CONFIG,
