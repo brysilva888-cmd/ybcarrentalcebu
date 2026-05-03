@@ -58,7 +58,7 @@ const Home: React.FC = () => {
           <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-6 lg:px-8 text-white pt-32 pb-16 md:pt-0 md:pb-0">
             <div className="max-w-3xl">
               <span className="inline-block bg-brand text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] px-4 py-1.5 rounded-full mb-6 md:mb-8 shadow-lg shadow-brand/30">
-                {config.business.tagline}
+                DRIVER AND FREE FUEL INCLUDED
               </span>
               <h1 className="text-3xl md:text-6xl font-extrabold mb-6 md:mb-8 leading-tight drop-shadow-2xl text-balance">
                 {config.pages.home.heroTitle}

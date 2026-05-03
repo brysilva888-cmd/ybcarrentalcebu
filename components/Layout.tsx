@@ -44,9 +44,6 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             <span className="text-xl md:text-2xl font-black uppercase tracking-tighter leading-none">
               {config.business.name}
             </span>
-            <span className={`hidden md:block text-[9px] md:text-[10px] font-bold uppercase tracking-[0.2em] mt-1 ${showSolidHeader ? 'text-gray-500' : 'text-white/80'}`}>
-              {config.business.tagline}
-            </span>
           </Link>
           
           <nav className="hidden md:flex space-x-8 items-center">
@@ -159,7 +156,6 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                 {config.navigation.map((link) => (
                   <li key={link.path}><Link to={link.path} className="hover:text-white transition-colors">{link.name}</Link></li>
                 ))}
-                <li><Link to="/blog" className="hover:text-white transition-colors">Blog</Link></li>
               </ul>
             </div>
             <div>

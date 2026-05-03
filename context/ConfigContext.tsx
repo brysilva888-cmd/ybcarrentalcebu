@@ -1,13 +1,11 @@
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { BUSINESS_INFO, TOURS, SERVICE_LIST } from '../constants/data';
-import { BLOG_POSTS } from '../constants/blog';
 
 const DEFAULT_CONFIG = {
   business: { ...BUSINESS_INFO },
   tours: [...TOURS],
   services: [...SERVICE_LIST],
-  blog: [...BLOG_POSTS],
   navigation: [
     { name: 'Home', path: '/' },
     { name: 'About Us', path: '/about' },
@@ -22,7 +20,6 @@ const DEFAULT_CONFIG = {
       why: true,
       tours: true,
       reviews: true,
-      blog: true,
       cta: true
     }
   },
@@ -30,12 +27,11 @@ const DEFAULT_CONFIG = {
     home: { title: 'Premium Cebu Car Rental with Driver & FREE Fuel', description: 'Looking for a Cebu car rental with driver and free fuel? YB Car Rental offers all-inclusive tour packages for a stress-free travel experience in Cebu.' },
     about: { title: 'About Us', description: 'Learn more about YB Car Rental and Tour.' },
     services: { title: 'Cebu Tour Packages & Car Services', description: 'Browse our wide range of Cebu tour packages.' },
-    contact: { title: 'Contact Us | Book Your Cebu Car Rental', description: 'Book your Cebu car rental today.' },
-    blog: { title: 'Travel Blog & Guides', description: 'Read the latest travel guides and safety tips.' }
+    contact: { title: 'Contact Us | Book Your Cebu Car Rental', description: 'Book your Cebu car rental today.' }
   },
   pages: {
     home: {
-      heroTitle: "Premium Cebu Car Rental with Driver & FREE Fuel.",
+      heroTitle: "Experience Cebu in Comfort",
       heroSubtitle: "The most affordable and stress-free way to explore Cebu. Our all-inclusive packages include a professional driver and full fuel coverage.",
       heroImage: "https://res.cloudinary.com/dgwcfarmv/image/upload/v1774066057/cebu2_znrw8f.webp",
       heroImageMobile: "https://res.cloudinary.com/dgwcfarmv/image/upload/c_scale,w_800,f_auto,q_auto/v1774066057/cebu2_znrw8f.webp"
@@ -59,8 +55,12 @@ export const ConfigProvider: React.FC<{ children: React.ReactNode }> = ({ childr
     try {
       const parsed = JSON.parse(saved);
       
-      // Force update heroTitle if it contains the old "FREE Driver" text
-      if (parsed.pages?.home?.heroTitle?.includes('FREE Driver')) {
+      // Force update heroTitle if it contains old versions
+      if (parsed.pages?.home?.heroTitle?.includes('FREE Driver') || 
+          parsed.pages?.home?.heroTitle?.includes('Premium Cebu Car Rental') ||
+          parsed.pages?.home?.heroTitle?.includes('Private Car Rentals') ||
+          parsed.pages?.home?.heroTitle?.includes('—') ||
+          parsed.pages?.home?.heroTitle?.includes('Fuel Included')) {
         parsed.pages.home.heroTitle = DEFAULT_CONFIG.pages.home.heroTitle;
       }
 
